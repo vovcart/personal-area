@@ -20,11 +20,18 @@ def whatTheFuck = coolFunc andThen (_.toUpperCase)
 
 whatTheFuck(3)
 
+
+def almostIncreasingSequence(sequence: Array[Int]): String = {
+  sequence.mkString(";")
+}
+
+almostIncreasingSequence(Array(1, 2, 3, 5, 6, 7))
+
 def wtf2 = (_: Int).toHexString
 
 def wtf3 = (_: String) + " constant"
 
-def wtf4 = (_:String).toUpperCase
+def wtf4 = (_: String).toUpperCase
 
 wtf2
 
@@ -45,4 +52,3 @@ implicit class WhaaatTHEFUUUUUUUUUUUUUUUUUUUCK[A](value: A) {
 }
 
 (3, "asd") |> wtf5 |> { case SimpleClass(_, string) => string }
-
