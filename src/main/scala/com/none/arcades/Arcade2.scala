@@ -1,4 +1,4 @@
-package com.none.Arcades
+package com.none.arcades
 
 object Arcade2 {
   def centuryFromYear(year: Int): Int = {
