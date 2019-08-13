@@ -1,8 +1,8 @@
-package com.none.web_app
+package com.none.wep_app_task_2
 
-import akka.http.scaladsl.server.Directives._
-import akka.actor.{ActorSystem, Nobody}
+import akka.actor.ActorSystem
 import akka.http.scaladsl.Http
+import akka.http.scaladsl.server.Directives._
 import akka.stream.ActorMaterializer
 
 object Main extends App {
