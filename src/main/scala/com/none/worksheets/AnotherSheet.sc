@@ -36,4 +36,7 @@ def isAsc(prev: Option[Int], list: Array[Int], invalidNumber: Int): Boolean = {
 }
 
 val list = Array(1,2,3,4,5,1,6)
+val a=System.nanoTime()
 almostIncreasingSequence(list)
+val b=System.nanoTime()
+b-a
