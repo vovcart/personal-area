@@ -20,6 +20,8 @@ package object web_app {
     implicit val aFormat = jsonFormat4(A)
     implicit val cFormat = jsonFormat1(C)
   }
+
+  //Test Data
   val pages = Pages(List(Page(1, "page1", "perpage1"), Page(2, "page2", "perPage2"), Page(3, "page3", "perPage3")))
 
   val listC: List[A] = List(A("p1", 1, 1.00, B(List("l1.1", "l1.2", "l1.3"), List(1, 2, 3))),
@@ -28,4 +30,5 @@ package object web_app {
     A("p4", 4, 4.00, B(List("l4.1", "l2.2", "l3.3"), List(10, 11, 12))))
 
   val objectC = C(listC)
+
 }

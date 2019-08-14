@@ -1,11 +1,10 @@
 package com.none.web_app
 
-import akka.http.scaladsl.server.{Directives, Route}
+import akka.http.scaladsl.server.Directives._
 
-object RouteTwo extends Directives with JsonSuport {
+final case class RouteTwo() extends JsonSuport {
 
-  def route(): Route = {
-    path("routetwo")
+  def route =
     concat(
       get {
         pathSingleSlash(
@@ -26,7 +25,7 @@ object RouteTwo extends Directives with JsonSuport {
         }
       },
       get {
-        pathPrefix("routetwo" / LongNumber) {
+        pathPrefix(LongNumber) {
           id => {
             complete {
               pages.pages.find(_.id == id).get.toString
@@ -51,5 +50,4 @@ object RouteTwo extends Directives with JsonSuport {
         complete("route two on POST!")
       }
     )
-  }
 }
