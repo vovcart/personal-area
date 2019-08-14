@@ -1,12 +1,10 @@
-val a=Array(1,2,3,4,5)
-a.filter(f=>f<4)
+def almostIncreasingSequence1(sequence: Array[Int]): Boolean = {
+  (1 until sequence.length).map(i => if (sequence(i-1) < sequence(i)) 0 else 1).sum <= 1 &&
+  (2 until sequence.length).map(i => if (sequence(i-2) < sequence(i)) 0 else 1).sum <= 1
+}
+val list = Array(1,2,3,4,5,1,6)
 
-
-case class Page(id: Long, page: String, perpage: String)
-
-case class Pages(pages: List[Page])
-
-
-
-val pages = Pages(List(Page(1, "page1", "perpage1"), Page(2, "page2", "perPage2"), Page(3, "page3", "perPage3")))
-pages.pages.find(_.id == 2)
+val a=System.nanoTime()
+almostIncreasingSequence1(list)
+val b=System.nanoTime()
+b-a
