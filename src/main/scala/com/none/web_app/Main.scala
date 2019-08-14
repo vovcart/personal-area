@@ -1,18 +1,19 @@
-package com.none.wep_app_task_2
+package com.none.web_app
 
+import akka.http.scaladsl.server.Directives._
 import akka.actor.ActorSystem
 import akka.http.scaladsl.Http
-import akka.http.scaladsl.server.Directives._
 import akka.stream.ActorMaterializer
+import com.typesafe.config.ConfigFactory
 
 object Main extends App {
   implicit val system = ActorSystem("my-system")
   implicit val materializer = ActorMaterializer()
-  //  implicit val executionContext = system.dispatcher
+
   val routes = concat(
     RouteOne.route(), RouteTwo.route()
   )
 
-
-  val route = Http().bindAndHandle(routes, "localhost", 8080)
+  val configLoad = ConfigFactory.load()
+  val route = Http().bindAndHandle(routes,configLoad.getString("http.host"),configLoad.getInt("http.port"))
 }
