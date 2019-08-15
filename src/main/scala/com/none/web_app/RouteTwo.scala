@@ -4,10 +4,10 @@ import akka.http.scaladsl.server.Directives._
 
 final case class RouteTwo() extends JsonSuport {
 
-  def route =
+  def route = pathPrefix("routetwo") {
     concat(
       get {
-        pathSingleSlash(
+        pathEndOrSingleSlash(
           complete(
             objectC
           )
@@ -50,4 +50,5 @@ final case class RouteTwo() extends JsonSuport {
         complete("route two on POST!")
       }
     )
+  }
 }

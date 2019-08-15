@@ -7,17 +7,13 @@ final case class RouteOne() extends JsonSuport {
   def route = pathPrefix("routeone") {
     concat(
       get {
-        complete(
-          objectC
-        )
-      } ~
-      get {
-        pathSingleSlash(
+        pathEndOrSingleSlash(
           complete(
             objectC
           )
         )
-      },
+      }
+      ,
       get {
         parameters('page, 'perpage) {
           (page: String, perPage: String) => {
