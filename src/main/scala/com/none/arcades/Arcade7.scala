@@ -5,7 +5,11 @@ object Arcade7 {
   def almostIncreasingSequence(sequence: Array[Int]): Boolean = {
     isAsc(None, sequence, 0)
   }
-  def isAsc(prev: Option[Int], list: Array[Int], invalidNumber: Int): Boolean = {
+  def isAsc(
+      prev: Option[Int],
+      list: Array[Int],
+      invalidNumber: Int
+  ): Boolean = {
     if (list.length <= 1) invalidNumber < 2
     else {
       val current = list.head

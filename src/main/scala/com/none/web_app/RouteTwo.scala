@@ -14,19 +14,22 @@ final case class RouteTwo() extends JsonSuport {
         )
       },
       get {
-        parameters('page, 'perpage) {
-          (page: String, perPage: String) => {
+        parameters('page, 'perpage) { (page: String, perPage: String) =>
+          {
             complete {
-              pages.pages.find(f => {
-                f.page == page && f.perpage == perPage
-              }).get.toString
+              pages.pages
+                .find(f => {
+                  f.page == page && f.perpage == perPage
+                })
+                .get
+                .toString
             }
           }
         }
       },
       get {
-        pathPrefix(LongNumber) {
-          id => {
+        pathPrefix(LongNumber) { id =>
+          {
             complete {
               pages.pages.find(_.id == id).get.toString
             }

@@ -8,7 +8,9 @@ object SolvedArcade8 {
 
   //Solution nr-2
   def matrixElementsSum2(matrix: Array[Array[Int]]): Int = {
-    matrix.transpose.map(col => col.reduceRight((l, r) => if (l == 0) 0 else l + r)).sum
+    matrix.transpose
+      .map(col => col.reduceRight((l, r) => if (l == 0) 0 else l + r))
+      .sum
   }
 
   //Solution nr-3
@@ -25,6 +27,5 @@ object SolvedArcade8 {
   def matrixElementsSum4(matrix: Array[Array[Int]]): Int = {
     (matrix.transpose.toList.flatMap(_ takeWhile (_ > 0))).fold(0)(_ + _)
   }
-
 
 }

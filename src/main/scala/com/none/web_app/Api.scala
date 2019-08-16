@@ -2,29 +2,29 @@ package com.none.web_app
 
 import java.lang.management.ManagementFactory
 
-import akka.http.scaladsl.server.Directives._
-import akka.actor.{ActorSystem, Terminated}
+import akka.actor.ActorSystem
 import akka.http.scaladsl.Http
+import akka.http.scaladsl.server.Directives._
 import akka.stream.ActorMaterializer
 import com.typesafe.config.ConfigFactory
-import com.typesafe.scalalogging.Logger
-import akka.http.scaladsl.Http.ServerBinding
+import com.typesafe.scalalogging.LazyLogging
+import scala.concurrent.Await
+import scala.concurrent.duration._
+import scala.util.{Failure, Success}
 
-import scala.concurrent.duration.Duration
-import scala.concurrent.{Await, Future}
+object Api extends App with LazyLogging {
 
-object Api extends App {
-
-  val log = Logger(Api.getClass)
   //Initiate config first
   //And context
   lazy val config = ConfigFactory.load()
 
   lazy val host = config.getString("http.host")
-  log.info("Setted hostname: {}", host)
+
+  logger.info(s"Setted hostname: $host")
 
   lazy val port = config.getInt("http.port")
-  log.info("Setted port: {}", port)
+
+  logger.info(s"Setted port: $port")
 
   //Then environment context
   implicit val system = ActorSystem("my-system")
@@ -37,19 +37,39 @@ object Api extends App {
   lazy val route = RouteOne().route ~ RouteTwo().route
 
   //Start Http server
-  val bindingFuture: Future[ServerBinding] = Http().bindAndHandle(route, host, port)
-  log.info("binded with {}: {}! ", host, port)
-  log.info("Server is up")
+  Http().bindAndHandle(route, host, port).onComplete {
+    case Success(it) =>
+      logger.info(s"Binded on $host:$port")
 
-  sys.addShutdownHook {
-    val terminate: Future[Terminated] = system.terminate()
-    Await.result(terminate, Duration("10 seconds"))
-    log.info("Server is not up")
+      logger.info("Server is up")
+
+      sys.addShutdownHook {
+
+        Await.result(it.unbind(), 10 seconds)
+
+        materializer.shutdown()
+
+        Await.result(system.terminate(), 10 seconds)
+
+        logger.info(s"Set free $host:$port")
+
+      }
+
+    case Failure(err) =>
+      logger.error("On server up something went wrong", err)
+
+      materializer.shutdown()
+
+      Await.result(system.terminate(), Duration.Inf)
+
+      logger.info("Bye !!!")
+
+      System.exit(0)
+
   }
 
-  log.info("Main thread id: "+ManagementFactory
-    .getRuntimeMXBean()
-    .getName()
-    .split("@")(0)
+  logger.info(
+    s"Main thread id: ${ManagementFactory.getRuntimeMXBean().getName.split("@")(0)}"
   )
+
 }
