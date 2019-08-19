@@ -7,5 +7,4 @@ object SolvedArcade12 {
     var c = -1
     a.map(h => if (h == -1) -1 else {c += 1; sorted(c)})
   }
-
 }

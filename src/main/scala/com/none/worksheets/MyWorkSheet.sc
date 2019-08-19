@@ -1,14 +1,26 @@
-val n = Array(4, 2, 9, 11, 2, 16)
-val a = n.sortWith(_ < _).dropWhile(_ == (-1))
-
-def sortList(listToSort: Array[Int], sortedList: Array[Int],formatedList:Array[Int], i: Int, j: Int): Array[Int] = {
-  if (i < listToSort.length) {
-    if (listToSort(i) == (-1)) {
-      sortList(listToSort, sortedList :+ listToSort(i), formatedList,i + 1, j)
-    } else {
-      sortList(listToSort, sortedList :+ formatedList(j), formatedList,i + 1,j+1)
-    }
-  } else sortedList
+def reverseInParentheses(inputString: String): String = {
+  if(!inputString.contains("(")){
+    inputString
+  } else {
+    val a = inputString.substring(inputString.lastIndexOf("("))
+    val start= inputString.substring(0,inputString.lastIndexOf("("))
+    val end=a.substring((a.indexOf(")"))+1)
+    val result=start+a.substring(1,a.indexOf(")")).reverse+end
+    reverseInParentheses(result)
+  }
 }
 
-sortList(n, Array(),a, 0, 0)
+//def getResult(s: String): String = {
+//  if(!s.contains("(")){
+//    s
+//  } else {
+//    val a = s.substring(s.lastIndexOf("("))
+//    val start= s.substring(0,s.lastIndexOf("("))
+//    val end=a.substring((a.indexOf(")"))+1)
+//    val result=start+a.substring(1,a.indexOf(")")).reverse+end
+//    getResult(result)
+//  }
+//}
+
+
+reverseInParentheses("foo(bar(baz))blim")
