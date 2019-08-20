@@ -1,8 +1,11 @@
-val a = Array(50, 60, 60, 45, 70)
+val a = Array(1, 2, 3)
+val b = Array(1, 10, 2)
 
-(0 to a.length - 1).map(f => if (f % 2 == 0) a(f) else 0).sum
-(0 to a.length - 1).map(f => if (f % 2 != 0) a(f) else 0).sum
+a.diff(b).length + b.diff(a).length
 
-(1 to a.length-1 by 2).map(a(_)).sum
-(0 to a.length-1 by 2).map(a(_)).sum
+(a.diff(b).length < 2) && (0 until a.length)
+  .map(i => if (a(i) != b(i)) 1 else 0).sum < 3
 
+//def areSimilar(a: Array[Int], b: Array[Int]): Boolean = {
+//
+//}
