@@ -1,26 +1,8 @@
-def reverseInParentheses(inputString: String): String = {
-  if(!inputString.contains("(")){
-    inputString
-  } else {
-    val a = inputString.substring(inputString.lastIndexOf("("))
-    val start= inputString.substring(0,inputString.lastIndexOf("("))
-    val end=a.substring((a.indexOf(")"))+1)
-    val result=start+a.substring(1,a.indexOf(")")).reverse+end
-    reverseInParentheses(result)
-  }
-}
+val a = Array(50, 60, 60, 45, 70)
 
-//def getResult(s: String): String = {
-//  if(!s.contains("(")){
-//    s
-//  } else {
-//    val a = s.substring(s.lastIndexOf("("))
-//    val start= s.substring(0,s.lastIndexOf("("))
-//    val end=a.substring((a.indexOf(")"))+1)
-//    val result=start+a.substring(1,a.indexOf(")")).reverse+end
-//    getResult(result)
-//  }
-//}
+(0 to a.length - 1).map(f => if (f % 2 == 0) a(f) else 0).sum
+(0 to a.length - 1).map(f => if (f % 2 != 0) a(f) else 0).sum
 
+(1 to a.length-1 by 2).map(a(_)).sum
+(0 to a.length-1 by 2).map(a(_)).sum
 
-reverseInParentheses("foo(bar(baz))blim")
