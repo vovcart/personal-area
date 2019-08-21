@@ -1,11 +1,25 @@
-val a = Array(1, 2, 3)
-val b = Array(1, 10, 2)
+val a = "aabb"
+val b= a.filter(_==a.distinct.head)
+a.diff(b)
+//val b = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaabc"
 
-a.diff(b).length + b.diff(a).length
+def palindromeRearranging(inputString: String): Boolean = {
+  rearrangedList(inputString, inputString.distinct, 0)
+}
 
-(a.diff(b).length < 2) && (0 until a.length)
-  .map(i => if (a(i) != b(i)) 1 else 0).sum < 3
+def rearrangedList(list: String, distinctList: String, sumNonPareStrings: Int): Boolean = {
+  val s=list.filter(_ == distinctList.head)
+  if (distinctList.isEmpty) {
+    sumNonPareStrings < 2
+  } else {
+    if (s.length % 2 == 0) {
+      rearrangedList(list.diff(s), distinctList.tail, sumNonPareStrings)
+    } else {
+      rearrangedList(list.diff(s), distinctList.tail, sumNonPareStrings + 1)
+    }
+  }
+}
 
-//def areSimilar(a: Array[Int], b: Array[Int]): Boolean = {
-//
-//}
+palindromeRearranging(a)
+
+
