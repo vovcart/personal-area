@@ -4,8 +4,12 @@ object Arcade18 {
   def palindromeRearranging(inputString: String): Boolean = {
     rearrangedList(inputString, inputString.distinct, 0)
   }
-  
-  def rearrangedList(list: String, distinctList: String, sumNonPareStrings: Int): Boolean = {
+
+  def rearrangedList(
+      list: String,
+      distinctList: String,
+      sumNonPareStrings: Int
+  ): Boolean = {
     val s = list.filter(_ == distinctList.head)
     if (distinctList.isEmpty) {
       sumNonPareStrings < 2
