@@ -1,25 +1,12 @@
-val a = "aabb"
-val b= a.filter(_==a.distinct.head)
-a.diff(b)
-//val b = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaabc"
+val a = Array(10, 11, 13)
+(a(0)-a(1)).abs
+(0 until a.length-1).map(i=> (a(i)-a(i+1)).abs).max
 
-def palindromeRearranging(inputString: String): Boolean = {
-  rearrangedList(inputString, inputString.distinct, 0)
-}
+//def arrayMaximalAdjacentDifference(inputArray: Array[Int]): Int = {
+//inputArray.foldLeft(0)()
+//
+//}
 
-def rearrangedList(list: String, distinctList: String, sumNonPareStrings: Int): Boolean = {
-  val s=list.filter(_ == distinctList.head)
-  if (distinctList.isEmpty) {
-    sumNonPareStrings < 2
-  } else {
-    if (s.length % 2 == 0) {
-      rearrangedList(list.diff(s), distinctList.tail, sumNonPareStrings)
-    } else {
-      rearrangedList(list.diff(s), distinctList.tail, sumNonPareStrings + 1)
-    }
-  }
-}
-
-palindromeRearranging(a)
+//arrayMaximalAdjacentDifference(a)
 
 
