@@ -1,13 +1,14 @@
-val a = "crazy"
-val b = "dsbaz"
+val n=10
+val i=7
+
+(180/4)
 
 
-def alphabeticShift(inputString: String): String = {
-  inputString.foldLeft("")((first, next) => {
-    if (next != 'z') (first) + (next.toByte + 1).toChar
-    else first + 'a'
-  })
+
+def circleOfNumbers(n: Int, firstNumber: Int): Int = {
+  if(firstNumber==n/2) 0 else
+  if(firstNumber<n/2) firstNumber+n/2 else firstNumber-n/2
 }
 
-alphabeticShift(a)
+circleOfNumbers(10,7)
 
