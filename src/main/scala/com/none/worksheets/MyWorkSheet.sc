@@ -1,21 +1,22 @@
-val a = Array(Array(36, 0, 18, 9),
-              Array(27, 54, 9, 0),
-              Array(81, 63, 72, 45))
+val a = Array(1, 2, 1)
+val b = 1
+val c = 3
+val d: Array[Int] = Array()
 
-  a.transpose.
+def arrayReplace(
+    inputArray: Array[Int],
+    elemToReplace: Int,
+    substitutionElem: Int
+): Array[Int] = {
+  val replacedArray: Array[Int] = Array()
+  inputArray.indices
+    .map(
+      f =>
+        if (inputArray(f) == elemToReplace) replacedArray :+ substitutionElem
+        else replacedArray :+ inputArray(f)
+    )
+    .toArray
+    .flatten
+}
 
-
-
-//def boxBlur(image: Array[Array[Int]]): Array[Array[Int]] = {
-//
-//}
-
-
-//def getBoxBlur(
-//               image: Array[Array[Int]],
-//               arrayIndex: Int,
-//               indexed: Int):Array[Array[Int]]={
-//
-//
-//
-//}
+arrayReplace(Array(1, 2, 1), 1, 3)
