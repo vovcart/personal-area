@@ -1,8 +1,4 @@
-val n=10
-val i=7
-
-(180/4)
-
+for(i <-0 to 10)yield if(i<2) i
 
 
 def circleOfNumbers(n: Int, firstNumber: Int): Int = {
