@@ -1,13 +1,15 @@
-package com.none.web_app
+package com.nothing
 
 import java.lang.management.ManagementFactory
 
 import akka.actor.ActorSystem
 import akka.http.scaladsl.Http
-import akka.http.scaladsl.server.Directives._
+import akka.http.scaladsl.server.RouteConcatenation._enhanceRouteWithConcatenation
 import akka.stream.ActorMaterializer
+import com.nothing.routes.{RouteOne, RouteTwo}
 import com.typesafe.config.ConfigFactory
 import com.typesafe.scalalogging.LazyLogging
+
 import scala.concurrent.Await
 import scala.concurrent.duration._
 import scala.util.{Failure, Success}
@@ -40,32 +42,21 @@ object Api extends App with LazyLogging {
   Http().bindAndHandle(route, host, port).onComplete {
     case Success(it) =>
       logger.info(s"Binded on $host:$port")
-
       logger.info("Server is up")
 
       sys.addShutdownHook {
-
         Await.result(it.unbind(), 10 seconds)
-
         materializer.shutdown()
-
         Await.result(system.terminate(), 10 seconds)
-
         logger.info(s"Set free $host:$port")
-
       }
 
     case Failure(err) =>
       logger.error("On server up something went wrong", err)
-
       materializer.shutdown()
-
       Await.result(system.terminate(), Duration.Inf)
-
       logger.info("Bye !!!")
-
       System.exit(0)
-
   }
 
   logger.info(

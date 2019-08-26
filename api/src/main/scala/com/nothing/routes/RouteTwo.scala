@@ -1,6 +1,8 @@
-package com.none.web_app
+package com.nothing.routes
 
 import akka.http.scaladsl.server.Directives._
+import com.web_app.JsonSuport
+import com.web_app._
 
 final case class RouteTwo() extends JsonSuport {
 
