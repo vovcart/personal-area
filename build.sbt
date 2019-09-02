@@ -5,13 +5,7 @@ scalaVersion in ThisBuild := "2.12.8"
 lazy val global = project
   .in(file("."))
   .settings(settings)
-  .aggregate(
-    arcades,
-    repository,
-    model,
-    service,
-    api
-  )
+  .aggregate(arcades, repository, model, service, api)
 
 lazy val arcades = project
   .enablePlugins(BuildInfoPlugin)

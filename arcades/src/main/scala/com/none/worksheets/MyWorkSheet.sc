@@ -1,10 +1,4 @@
-for(i <-0 to 10)yield if(i<2) i
+val a = List(2, 4, 7)
 
-
-def circleOfNumbers(n: Int, firstNumber: Int): Int = {
-  if(firstNumber==n/2) 0 else
-  if(firstNumber<n/2) firstNumber+n/2 else firstNumber-n/2
-}
-
-circleOfNumbers(10,7)
-
+val sum = a.indices.map(j =>a.indices.map(i => (a(i) - a(j)).abs).sum)
+a(sum.indexOf(sum.min))
