@@ -1,4 +1,4 @@
-import com.none.arcades.Arcade38
+import com.none.arcades.arcades_31_40.Arcade38
 import org.scalatest.{FunSuite, Matchers}
 
 class Arcade38Test extends FunSuite with Matchers{
