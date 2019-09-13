@@ -9,12 +9,11 @@ object Arcade25 {
   ): Array[Int] = {
     val replacedArray: Array[Int] = Array()
     inputArray.indices
-      .map(
+      .flatMap(
         f =>
           if (inputArray(f) == elemToReplace) replacedArray :+ substitutionElem
           else replacedArray :+ inputArray(f)
       )
       .toArray
-      .flatten
   }
 }

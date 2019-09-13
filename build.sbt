@@ -14,8 +14,9 @@ lazy val arcades = project
     name := "arcades",
     commonSettings,
     settings,
-    assemblySettings
-  )
+    assemblySettings,
+    libraryDependencies ++= Seq(dependencies.scalaTest)
+    )
 
 lazy val api = project
   .enablePlugins(BuildInfoPlugin)
@@ -26,7 +27,7 @@ lazy val api = project
     settings,
     assemblySettings,
     libraryDependencies ++= commonDependencies
-  )
+    )
 
 lazy val model = project
   .enablePlugins(BuildInfoPlugin)
@@ -37,7 +38,7 @@ lazy val model = project
     settings,
     assemblySettings,
     libraryDependencies ++= commonDependencies
-  )
+    )
 
 lazy val repository = project
   .enablePlugins(BuildInfoPlugin)
@@ -48,7 +49,7 @@ lazy val repository = project
     settings,
     assemblySettings,
     libraryDependencies ++= commonDependencies
-  )
+    )
 
 lazy val service = project
   .enablePlugins(BuildInfoPlugin)
@@ -58,12 +59,12 @@ lazy val service = project
     commonSettings settings,
     assemblySettings,
     libraryDependencies ++= commonDependencies
-  )
+    )
 
 lazy val commonSettings = List(
   scalacOptions := "-unchecked" ::
     "-target:jvm-1.8" :: Nil
-)
+  )
 
 lazy val settings = Seq(
   scalacOptions ++= Seq(
@@ -76,23 +77,23 @@ lazy val settings = Seq(
     "-deprecation",
     "-encoding",
     "utf8"
-  ),
+    ),
   resolvers ++= Seq(
     "Local Maven Repository" at "file://" + Path.userHome.absolutePath + "/.m2/repository",
     Resolver.sonatypeRepo("releases"),
     Resolver.sonatypeRepo("snapshots")
+    )
   )
-)
 
 lazy val metaBuildSettings = List(
   buildInfoKeys := Seq(
     scalaVersion,
     BuildInfoKey.action("branch")(branch),
     BuildInfoKey.action("lastCommit")(lastCommit)
-  ),
+    ),
   buildInfoObject := "MetaInfo",
   buildInfoPackage := "MetaInfo"
-)
+  )
 
 def branch = Process(s"git rev-parse --abbrev-ref HEAD").lineStream.head
 def lastCommit = Process(s"git rev-parse --short HEAD~0").lineStream.head
@@ -106,6 +107,7 @@ lazy val dependencies = new {
   val akkaHttpSprayJson = "com.typesafe.akka" %% "akka-http-spray-json" % "10.1.9"
   val logback = "ch.qos.logback" % "logback-classic" % "1.2.3"
   val scalaLogging = "com.typesafe.scala-logging" %% "scala-logging" % "3.9.2"
+  val scalaTest = "org.scalatest" %% "scalatest" % "3.0.1" % "test"
 }
 
 lazy val commonDependencies = Seq(
@@ -114,13 +116,14 @@ lazy val commonDependencies = Seq(
   dependencies.typesafeConfig,
   dependencies.akkaHttpSprayJson,
   dependencies.logback,
-  dependencies.scalaLogging
-)
+  dependencies.scalaLogging,
+  dependencies.scalaTest
+  )
 
 lazy val assemblySettings = Seq(
   assemblyJarName in assembly := name.value + ".jar",
   assemblyMergeStrategy in assembly := {
-    case PathList("META-INF", xs @ _*) => MergeStrategy.discard
-    case _                             => MergeStrategy.first
+    case PathList("META-INF", xs@_*) => MergeStrategy.discard
+    case _ => MergeStrategy.first
   }
-)
+  )
