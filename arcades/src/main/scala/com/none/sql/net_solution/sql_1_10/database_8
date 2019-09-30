@@ -1,0 +1,28 @@
+--------------------------------------------------------------------------
+Solution nr-1:
+--------------------------------------------------------------------------
+CREATE PROCEDURE contestLeaderboard()
+BEGIN
+    SELECT name FROM leaderboard
+    ORDER BY score DESC
+    LIMIT 3,5;
+END
+--------------------------------------------------------------------------
+Solution nr-2:
+--------------------------------------------------------------------------
+CREATE PROCEDURE contestLeaderboard()
+BEGIN
+    select name from leaderboard order by score desc limit 5 offset 3;
+END
+--------------------------------------------------------------------------
+Solution nr-3
+--------------------------------------------------------------------------
+CREATE PROCEDURE contestLeaderboard()
+BEGIN
+    set @rank = 0;
+    select name from
+        (select @rank:=@rank+1 as rank, name, score from leaderboard
+        order by score desc) as T
+    where rank >= 4 and rank <= 8;
+END
+--------------------------------------------------------------------------

@@ -1,0 +1,11 @@
+/*Please add ; after each select statement*/
+CREATE PROCEDURE contestLeaderboard()
+BEGIN
+    Select c.name
+    FROM leaderboard c
+    WHERE c.score<=(Select
+        MIN(b.score) as score
+        FROM(SELECT a.score
+        FROM leaderboard a
+        ORDER BY a.score DESC LIMIT 4) b) ORDER by c.score DESC LIMIT 5;
+END

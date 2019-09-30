@@ -1,0 +1,6 @@
+CREATE PROCEDURE mostExpensive()
+BEGIN
+	SELECT Min(name) as name
+	FROM Products
+	WHERE price*quantity=(Select Max(price*quantity) FROM Products);
+END

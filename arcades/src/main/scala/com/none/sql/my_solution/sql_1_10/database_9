@@ -1,0 +1,6 @@
+CREATE PROCEDURE gradeDistribution()
+BEGIN
+Select Name, ID From Grades
+    Where Final> Midterm1*0.25+ Midterm2*0.25+Final*0.5
+    OR Final> Midterm1*0.50+ Midterm2*0.50 ORDER BY LEFT(name,3) ASC, id ASC;
+END
