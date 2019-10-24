@@ -25,7 +25,7 @@ create table Employees(
     start_work_at time,
     end_work_at time,
     project int,
-    details int,
+    employee_details int,
     team int
 );
 
@@ -58,7 +58,7 @@ alter table Employees
 
 alter table Employees
     add constraint details_employee_details_id_fk
-    foreign key (details)
+    foreign key (employee_details)
     references Employees_details(employee_details_id)
     ON UPDATE CASCADE ON DELETE CASCADE;
 

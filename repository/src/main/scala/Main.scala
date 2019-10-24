@@ -15,6 +15,8 @@ object Main extends CRUD {
           EmployeeDetailsModel(id = Some(2), passportId = 2, isMarried = 2, has_children = 2, location = "da pofik la patrat", studyGrade = "injjiner in al 2-lea an"),
           EmployeeDetailsModel(Some(3), 3, 3, 3, "da pofik la cub", "injjiner in al 3-lea an"))
       )
+
+
     EmployeesDetails.find(2)
     db.close()
   }

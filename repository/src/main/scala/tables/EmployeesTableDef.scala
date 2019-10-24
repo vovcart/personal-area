@@ -1,7 +1,6 @@
 package tables
 
 import models.EmployeeModel
-import slick.ast.ColumnOption.{AutoInc, PrimaryKey}
 import slick.lifted.ProvenShape
 import slick.jdbc.MySQLProfile.api._
 
@@ -12,7 +11,7 @@ class EmployeesTableDef(tag: Tag) extends Table[EmployeeModel](tag, "Employees")
     (id, name, surname, age, jobDescription, startWorkAt, endWorkAt, projectsId, projectDetailsId, teamId) <>
       (EmployeeModel.tupled, EmployeeModel.unapply)
 
-  def id: Rep[Option[Int]] = column[Option[Int]]("employee_id", PrimaryKey, AutoInc)
+  def id: Rep[Option[Int]] = column[Option[Int]]("employee_id", O.PrimaryKey)
 
   def name: Rep[String] = column[String]("name")
 
@@ -26,7 +25,7 @@ class EmployeesTableDef(tag: Tag) extends Table[EmployeeModel](tag, "Employees")
 
   def endWorkAt: Rep[String] = column[String]("end_work_at")
 
-  def projectDetailsId: Rep[Option[Int]] = column[Option[Int]]("project_details_Id")
+  def projectDetailsId: Rep[Option[Int]] = column[Option[Int]]("project_details_id")
 
   def teamId: Rep[Option[Int]] = column[Option[Int]]("team_Id")
 
