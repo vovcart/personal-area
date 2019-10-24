@@ -1,11 +1,12 @@
 import scala.sys.process.Process
+import Dependencies._
 
 scalaVersion in ThisBuild := "2.12.8"
 
 lazy val global = project
   .in(file("."))
   .settings(settings)
-  .aggregate(arcades, repository, model, service, api)
+  .aggregate(arcades, repository, models, service, api)
 
 lazy val arcades = project
   .enablePlugins(BuildInfoPlugin)
@@ -15,7 +16,7 @@ lazy val arcades = project
     commonSettings,
     settings,
     assemblySettings,
-    libraryDependencies ++= Seq(dependencies.scalaTest)
+    libraryDependencies ++= Seq(scalaTest)
     )
 
 lazy val api = project
@@ -29,15 +30,14 @@ lazy val api = project
     libraryDependencies ++= commonDependencies
     )
 
-lazy val model = project
+lazy val models = project
   .enablePlugins(BuildInfoPlugin)
   .settings(metaBuildSettings: _*)
   .settings(
-    name := "model",
+    name := "models",
     commonSettings,
     settings,
     assemblySettings,
-    libraryDependencies ++= commonDependencies
     )
 
 lazy val repository = project
@@ -48,7 +48,7 @@ lazy val repository = project
     commonSettings,
     settings,
     assemblySettings,
-    libraryDependencies ++= commonDependencies
+    libraryDependencies ++= databaseDependencies
     )
 
 lazy val service = project
@@ -58,7 +58,6 @@ lazy val service = project
     name := "service",
     commonSettings settings,
     assemblySettings,
-    libraryDependencies ++= commonDependencies
     )
 
 lazy val commonSettings = List(
@@ -99,26 +98,6 @@ def branch = Process(s"git rev-parse --abbrev-ref HEAD").lineStream.head
 def lastCommit = Process(s"git rev-parse --short HEAD~0").lineStream.head
 
 scalafmtOnCompile := true
-
-lazy val dependencies = new {
-  val akkahttp = "com.typesafe.akka" %% "akka-http" % "10.1.9"
-  val akkaStream = "com.typesafe.akka" %% "akka-stream" % "2.5.23"
-  val typesafeConfig = "com.typesafe" % "config" % "1.3.4"
-  val akkaHttpSprayJson = "com.typesafe.akka" %% "akka-http-spray-json" % "10.1.9"
-  val logback = "ch.qos.logback" % "logback-classic" % "1.2.3"
-  val scalaLogging = "com.typesafe.scala-logging" %% "scala-logging" % "3.9.2"
-  val scalaTest = "org.scalatest" %% "scalatest" % "3.0.1" % "test"
-}
-
-lazy val commonDependencies = Seq(
-  dependencies.akkahttp,
-  dependencies.akkaStream,
-  dependencies.typesafeConfig,
-  dependencies.akkaHttpSprayJson,
-  dependencies.logback,
-  dependencies.scalaLogging,
-  dependencies.scalaTest
-  )
 
 lazy val assemblySettings = Seq(
   assemblyJarName in assembly := name.value + ".jar",
