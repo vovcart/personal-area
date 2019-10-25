@@ -8,7 +8,7 @@ import slick.jdbc.MySQLProfile.api._
 class EmployeesTableDef(tag: Tag) extends Table[EmployeeModel](tag, "Employees") {
 
   def * : ProvenShape[EmployeeModel] =
-    (id, name, surname, age, jobDescription, startWorkAt, endWorkAt, projectsId, projectDetailsId, teamId) <>
+    (id, name, surname, age, jobDescription, startWorkAt, endWorkAt, team, projectDetails, employeeDetails) <>
       (EmployeeModel.tupled, EmployeeModel.unapply)
 
   def id: Rep[Option[Int]] = column[Option[Int]]("employee_id", O.PrimaryKey)
@@ -25,10 +25,10 @@ class EmployeesTableDef(tag: Tag) extends Table[EmployeeModel](tag, "Employees")
 
   def endWorkAt: Rep[String] = column[String]("end_work_at")
 
-  def projectDetailsId: Rep[Option[Int]] = column[Option[Int]]("project_details_id")
+  def team: Rep[Option[Int]] = column[Option[Int]]("team")
 
-  def teamId: Rep[Option[Int]] = column[Option[Int]]("team_Id")
+  def projectDetails: Rep[Option[Int]] = column[Option[Int]]("project_details")
 
-  def projectsId: Rep[Option[Int]] = column[Option[Int]]("projects_id")
+  def employeeDetails: Rep[Option[Int]] = column[Option[Int]]("employee_details")
 
 }

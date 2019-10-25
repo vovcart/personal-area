@@ -2,7 +2,7 @@ create table Teams(
     team_id int not null primary key AUTO_INCREMENT,
     name varchar(50),
     project_ref int,
-    team_leader int
+    team_leader varchar(50)
 );
 
 create table Projects(
@@ -12,7 +12,7 @@ create table Projects(
     started date,
     ended date,
     client varchar(50),
-    project_manager int,
+    project_manager varchar(50),
     delivery_manager varchar(50)
 );
 
@@ -24,9 +24,9 @@ create table Employees(
     job_description varchar(50),
     start_work_at time,
     end_work_at time,
-    project int,
-    employee_details int,
-    team int
+    team int,
+    project_details int,
+    employee_details int
 );
 
 create table Employees_details(
@@ -44,15 +44,9 @@ alter table Teams
     references Projects(project_id)
     ON UPDATE CASCADE ON DELETE CASCADE;
 
-alter table Projects
-    add constraint project_manager_employee_id_fk
-    foreign key (project_manager)
-    references Employees(employee_id)
-    ON UPDATE CASCADE ON DELETE CASCADE;
-
 alter table Employees
     add constraint project_project_id_fk
-    foreign key (project)
+    foreign key (project_details)
     references Projects(project_id)
     ON UPDATE CASCADE ON DELETE CASCADE;
 

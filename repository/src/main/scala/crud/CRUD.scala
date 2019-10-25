@@ -1,9 +1,9 @@
 package crud
 
-import slick.jdbc.MySQLProfile.api._
+import tables._
 import slick.lifted.AbstractTable
-import tables.{EmployeesDetailsTableDef, EmployeesTableDef, ProjectsTableDef, TeamsTableDef}
-import connection.ConnectionConfig._
+import slick.jdbc.MySQLProfile.api._
+import connection.ConnectionConfig.db
 
 abstract class CRUD {
   implicit lazy val employeesDetailsQuery: TableQuery[EmployeesDetailsTableDef] = TableQuery[EmployeesDetailsTableDef]

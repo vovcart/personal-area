@@ -88,7 +88,7 @@ lazy val metaBuildSettings = List(
   buildInfoKeys := Seq(
     scalaVersion,
     BuildInfoKey.action("branch")(branch),
-    BuildInfoKey.action("lastCommit")(lastCommit)
+    BuildInfoKey.action("lastCommit")(lastCommit),
     ),
   buildInfoObject := "MetaInfo",
   buildInfoPackage := "MetaInfo"
@@ -106,3 +106,7 @@ lazy val assemblySettings = Seq(
     case _ => MergeStrategy.first
   }
   )
+//Run a command on compile
+//lazy val serverStart= taskKey[Unit]("start server")
+//serverStart := {Process(s"docker start company-db").run}
+//(compile in Compile):=((compile in Compile).dependsOn(serverStart)).value

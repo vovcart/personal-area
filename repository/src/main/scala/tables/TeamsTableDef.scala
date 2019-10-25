@@ -16,5 +16,5 @@ class TeamsTableDef(tag: Tag) extends Table[TeamModel](tag, "Teams") {
 
   def projectRef: Rep[Option[Int]] = column[Option[Int]]("project_ref")
 
-  def team_leader: Rep[Option[Int]] = column[Option[Int]]("team_leader")
+  def team_leader: Rep[String] = column[String]("team_leader")
 }

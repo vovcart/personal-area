@@ -1,7 +1,6 @@
 package models
 
-case class TeamModel(id:Option[Int],
+case class TeamModel(id:Option[Int]=None,
                      name:String,
                      projectRef: Option[Int],
-                     team_leader: Option[Int]
-                )
+                     team_leader: String)

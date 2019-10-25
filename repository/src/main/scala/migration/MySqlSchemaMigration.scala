@@ -1,8 +1,9 @@
 package migration
+
 import org.flywaydb.core.Flyway
 import connection.FlywayConfig._
 
-object MySqlSchemaMigration{
+object MySqlSchemaMigration {
 
   def migrateSchema(schemaName: String): Int = {
     Flyway.configure
