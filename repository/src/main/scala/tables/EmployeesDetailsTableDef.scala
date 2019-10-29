@@ -20,6 +20,11 @@ class EmployeesDetailsTableDef(tag: Tag) extends Table[EmployeeDetailsModel](tag
   def location: Rep[String] = column[String]("location")
 
   def studyGrade: Rep[String] = column[String]("study_grade")
+
+}
+
+object EmployeesDetailsTable{
+  val employeesDetailsQuery: TableQuery[EmployeesDetailsTableDef] = TableQuery[EmployeesDetailsTableDef]
 }
 
 

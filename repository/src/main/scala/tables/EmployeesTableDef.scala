@@ -32,3 +32,7 @@ class EmployeesTableDef(tag: Tag) extends Table[EmployeeModel](tag, "Employees")
   def employeeDetails: Rep[Option[Int]] = column[Option[Int]]("employee_details")
 
 }
+
+object EmployeesTable{
+  val employeesQuery: TableQuery[EmployeesTableDef] = TableQuery[EmployeesTableDef]
+}

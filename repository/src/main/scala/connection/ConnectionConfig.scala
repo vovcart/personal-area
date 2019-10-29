@@ -1,6 +1,7 @@
 package connection
 
 import com.typesafe.config.{Config, ConfigFactory}
+import slick.jdbc.MySQLProfile
 import slick.jdbc.MySQLProfile.api._
 
 object ConnectionConfig {
@@ -9,5 +10,5 @@ object ConnectionConfig {
   private lazy val url: String = mySqlProperties.getString("mysql.properties.schemaUrl")
   private lazy val user: String = mySqlProperties.getString("mysql.properties.user")
   private lazy val password: String = mySqlProperties.getString("mysql.properties.password")
-  lazy val db = Database.forURL(url, user, password, driver = driver)
+  implicit lazy val db: MySQLProfile.backend.DatabaseDef = Database.forURL(url, user, password, driver = driver)
 }

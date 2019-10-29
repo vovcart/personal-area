@@ -25,4 +25,9 @@ case class ProjectsTableDef(tag: Tag) extends Table[ProjectModel](tag, "Projects
   def projectManager: Rep[String] = column[String]("project_manager")
 
   def deliveryManager: Rep[String] = column[String]("delivery_manager")
+
+}
+
+object ProjectsTable{
+  val projectsQuery: TableQuery[ProjectsTableDef] = TableQuery[ProjectsTableDef]
 }

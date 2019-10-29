@@ -17,4 +17,9 @@ class TeamsTableDef(tag: Tag) extends Table[TeamModel](tag, "Teams") {
   def projectRef: Rep[Option[Int]] = column[Option[Int]]("project_ref")
 
   def team_leader: Rep[String] = column[String]("team_leader")
+
+}
+
+object TeamsTable{
+  val teamsQuery: TableQuery[TeamsTableDef] = TableQuery[TeamsTableDef]
 }
